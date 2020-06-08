@@ -16,6 +16,7 @@
 
 ## 截图 ##
 ![avatar](/screenShot/index.png)
+<img src="https://github.com/ccKwon/vue-elm/tree/master/screenShot" width="365" height="619"/>
 
 
 ## Project setup
