@@ -1,10 +1,10 @@
 <template>
   <div>
 
-    <div @click="toAddress" class="location">
+    <!-- <div @click="toAddress" class="location">
       <img src="../../images/region.png">
       <span>{{address}}</span>
-    </div>
+    </div> -->
 
     <div class="search">
       <van-search background="#26a2ff" shape="round" placeholder="输入商家、商品名称" v-model="search" />
