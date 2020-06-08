@@ -8,7 +8,7 @@
                     <span class="info_title">
                         <h4>{{ item.name }}</h4>
                         <p><span>
-                                <van-rate style="vertical-align: middle" v-model="item.rate" :size="10" allow-half />
+                                <van-rate style="vertical-align: middle" size="0.3rem" v-model="item.rate" allow-half />
                                 <section class="score">{{ item.rate }}</section>
                                 <section>月售{{ item.sale }}</section>
                             </span> <span>
@@ -92,9 +92,12 @@
                         float: left;
                         width: 60px;
                         height: 60px;
+                        margin-right: 10px;
                     }
 
                     h4 {
+                        font-size: 16px;
+                        font-weight: 400;
                         width: 100%;
                     }
                 }

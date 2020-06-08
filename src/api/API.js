@@ -1,4 +1,4 @@
-let baseUrl = "http://localhost:8081"
+let baseUrl = "http://localhost:8089"
 
 
 const online_url = {
@@ -13,7 +13,8 @@ const online_url = {
     insertorder: baseUrl + "/insertorder?ordersaves=",
     queryorders: baseUrl + "/orders?id=",
     category: baseUrl + "/insertcategory?gname=",
-    dologin: baseUrl + "/dologin?name="
+    dologin: baseUrl + "/dologin?name=",
+    getfooddeatil: baseUrl + "/getfoodByid?id=",
 }
 
 export default online_url

@@ -1,8 +1,15 @@
 <template>
   <div>
+
+    <div @click="toAddress" class="location">
+      <img src="../../images/region.png">
+      <span>{{address}}</span>
+    </div>
+
     <div class="search">
       <van-search background="#26a2ff" shape="round" placeholder="输入商家、商品名称" v-model="search" />
     </div>
+
     <div class="swipe">
       <mt-swipe :auto="4000">
         <mt-swipe-item><img src="../../images/1.jpg" alt=""></mt-swipe-item>
@@ -73,18 +80,32 @@
         search: '',
         data: '',
         selected: '订单',
-        value: 4.5
+        value: 4.5,
+        address:'',
       }
+    },
+
+    created() {
+      this.getip();
     },
 
     methods: {
 
-      to_shoplist() {
-        this.$router.push('/shoplist')
-        console.log(this.$store.state.username);
+      toAddress() {
+        this.$router.push('/address');
       },
 
+      to_shoplist() {
+        this.$router.push('/shoplist')
+        // console.log(this.$store.state.username);
+      },
 
+      getip() {
+        this.axios.get('https://api.map.baidu.com/location/ip?ak=BnlVvcpo3LTtQ2WvVs0ZlOhtKWWuKO8q').then(res => {
+          this.address = res.data.content.address;
+        })
+
+      }
     },
 
     components: {
@@ -94,6 +115,22 @@
 </script>
 
 <style lang="scss">
+  .location {
+    padding: 0 10px;
+    height: 30px;
+    display: flex;
+    font-size: 20px;
+    align-items: center;
+    color: white;
+    // justify-content: center;
+    background-color: #26a2ff;
+
+    img {
+      height: 24px;
+      width: 24px;
+    }
+  }
+
   .search {
     background: #3190e8;
   }
@@ -110,6 +147,7 @@
 
   .food-swipe {
     height: 180px !important;
+
     .mint-swipe-indicators {
       bottom: 0px;
     }

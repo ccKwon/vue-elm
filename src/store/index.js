@@ -9,6 +9,7 @@ export default new Vuex.Store({
     Cart: cart
   },
   mutations: {
+    // 添加到购物车功能
     addtocart(state, val) {
       let flag = false;
       // 如果购物车中有这个商品 则只增加数量
@@ -28,6 +29,7 @@ export default new Vuex.Store({
       localStorage.setItem("foodcart", JSON.stringify(state.Cart));
     },
 
+    // 向购物车中添加商品ID及其对应的商品id
     addtocartByid(state, val) {
       state.Cart.some(item => {
         if (item.id == val.id && item.shopId == val.shopid) {
@@ -38,6 +40,7 @@ export default new Vuex.Store({
       localStorage.setItem("foodcart", JSON.stringify(state.Cart));
     },
 
+    // 减少商品
     subfood(state, val) {
       state.Cart.some((item, index) => {
         if (item.id == val.id && item.shopId == val.shopid) {
@@ -52,6 +55,7 @@ export default new Vuex.Store({
     },
 
 
+    // 清空某个商店购物车的商品
     clearshopcart(state, shopid) {
       var i = 0
       var j = 0

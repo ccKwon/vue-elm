@@ -12,6 +12,8 @@ import updatepwd from '../views/user/updatepwd.vue'
 import placeorder from '../views/orders/placeorder.vue'
 import orderPay from '../views/orders/order_pay.vue'
 import shoplogin from '../views/shopuser/shoplogin.vue'
+import fooddeatile from '../views/shop_deatil/fooddeatile.vue'
+import address from '../views/address/address.vue'
 
 Vue.use(VueRouter)
 
@@ -89,6 +91,18 @@ const routes = [
     name: 'orderPay',
     component: orderPay,
     meta: { Alive: true}
+  },
+  {
+    path: '/foodDeatil',
+    name: 'foodDeatile',
+    component: fooddeatile,
+    meta: {Alive:false}
+  },
+  {
+    path: '/address',
+    name: 'address',
+    component: address,
+    meta: {Alive:false}
   }
 ]
 

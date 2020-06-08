@@ -32,7 +32,8 @@
                         <li v-for="(item, index) in goodlist" :key="index" class="food-list">
                             <h4 class="title">{{ item.gname }}</h4>
                             <ul>
-                                <li v-for="foodList in item.foodLists" :key="foodList.fid" class="food-item">
+                                <li @click="toFoodDeatil(foodList.fid)" v-for="foodList in item.foodLists"
+                                    :key="foodList.fid" class="food-item">
                                     <div class="icon">
                                         <img width="70px" height="70px" src="../../images/商圈.png" alt="">
                                     </div>
@@ -40,14 +41,16 @@
                                         <h2 class="food-name">{{ foodList.fname }}</h2>
                                         <p class="desc">{{ foodList.finfo }}</p>
                                         <div class="rate">
+
                                             <span>月销售{{ foodList.fsale }}份 </span>
                                             <span> 好评率{{ foodList.frate }}%</span>
                                         </div>
-                                        <div class="price">
+                                        <div @click.stop class="price">
                                             <span class="food_price">￥{{ foodList.price }}</span>
-                                            <span class="plus">
-                                                <van-icon @click="addtocart(foodList, shopinfo.shopid)" color="white"
-                                                    size="12" name="plus" />
+                                            <span class="plus" @click="addtocart(foodList, shopinfo.shopid)">
+                                                +
+                                                <!-- <van-icon @click="addtocart(foodList, shopinfo.shopid)" color="white"
+                                                    size="12" name="plus" /> -->
                                             </span>
                                         </div>
                                     </div>
@@ -63,24 +66,26 @@
                 <div class="comment_info">
                     <div class="score">
                         <span>{{ shopinfo.rate }}
-                            <van-rate style="vertical-align: middle" v-model="star" :size="12" allow-half /></span>
+                            <van-rate style="vertical-align: middle" v-model="star" size="0.3rem" allow-half /></span>
                         <span>味道 {{ shopinfo.tasterate }} 包装 {{ shopinfo.packrate }} 配送 {{ shopinfo.devrate }}</span>
                     </div>
 
                     <div class="score_info">
-                        <van-tag type="primary">全部 {{ commentList.length }}</van-tag>
-                        <van-tag type="primary">最新</van-tag>
-                        <van-tag type="primary">好评 {{ shopinfo.good }}%</van-tag>
-                        <br>
-                        <van-tag type="primary">差评 {{ shopinfo.bad }}%</van-tag>
-                        <van-tag type="primary">有图 229</van-tag>
+                        <ul class="primary">
+                            <li>全部 {{ commentList.length }}</li>
+                            <li>最新</li>
+                            <li>好评 {{ shopinfo.good }}%</li>
+                            <li>差评 {{ shopinfo.bad }}%</li>
+                            <li>有图 229</li>
+                        </ul>
+
                     </div>
                 </div>
 
                 <div v-for="item in commentList" :key="item.id" class="comments">
                     <div class="user_score">
                         <div>
-                            <img src="../../images/商圈.png" alt="">
+                            <img src="../../images/user.jpg" alt="">
                         </div>
                         <div class="user_info">
                             <span>
@@ -88,7 +93,7 @@
                                 <section>2019-11-27</section>
                             </span>
                             <p>
-                                <van-rate style="vertical-align: middle" v-model="item.rate" :size="12" allow-half />
+                                <van-rate style="vertical-align: middle" v-model="item.rate" size="0.3rem" allow-half />
                             </p>
                         </div>
 
@@ -109,9 +114,9 @@
             </mt-tab-container-item>
         </mt-tab-container>
 
-        <div  class="shopcart-container">
+        <div class="shopcart-container">
             <div @click="showcartclick()" class="cart_icon_container">
-                <div class="inline">
+                <div class="inline" :class="{'inline_color':flag}">
                     <img src="../../images/cart_empty.png" alt="">
                 </div>
             </div>
@@ -122,7 +127,7 @@
             <!-- <div class="gotopay">
                 还差￥{{ shopinfo.lowest }}起送
             </div> -->
-            <div @click="toplaceorder(shopinfo.shopid)" class="gotopay gotopay_active">
+            <div @click="toplaceorder(shopinfo.shopid)" class="gotopay" :class="{'gotopay_active':flag}">
                 去结算
             </div>
         </div>
@@ -177,7 +182,7 @@
                 // foodcart: JSON.parse(localStorage.getItem("foodcart"))
 
                 foodcart: this.$store.state.Cart,
-
+                flag: false,
                 totalprice: '',
             }
         },
@@ -189,8 +194,9 @@
         created() {
             this.getcomments(),
                 this.getshoplist(),
-                this.getgoodlist()
-                // this.setshopcart()
+                this.getgoodlist(),
+                this.setshopcart()
+
         },
 
 
@@ -210,19 +216,43 @@
 
         methods: {
 
-            toplaceorder() {
-                this.$router.push({path: '/placeorder', query:{'shopid':this.shopinfo.shopid}});
+            toFoodDeatil(id) {
+                this.$router.push({
+                    path: '/foodDeatil',
+                    query: {
+                        'id': id
+                    }
+                })
             },
 
+            toplaceorder() {
+                if (this.flag) {
+                    this.$router.push({
+                        path: '/placeorder',
+                        query: {
+                            'shopid': this.shopinfo.shopid
+                        }
+                    });
+                }
+
+            },
+
+            // 一键清空购物车
             clearshopcart(shopid) {
+                this.flag = false;
+                this.showcart = false;
                 this.$store.commit("clearshopcart", shopid);
             },
 
+            // 计算总价格
             getsumprice() {
                 this.totalprice = this.$store.commit("getAomunt", this.shopinfo.shopid)
             },
 
+
+            // 商品列表中点击+号添加物品到购物车
             addtocart(val, shopid) {
+                // 保存对应商品信息
                 let foodobject = {
                     shopId: shopid,
                     id: val.fid,
@@ -232,8 +262,11 @@
                 }
 
                 this.$store.commit('addtocart', foodobject)
+                this.setshopcart()
+
             },
 
+            // 购物车中点击+号增加物品数量
             addtocartByid(id, shopid) {
                 this.$store.commit('addtocartByid', {
                     id,
@@ -241,23 +274,39 @@
                 })
             },
 
+            // 购物车中点击-号减少物品数量
             subfoodcartByid(id, shopid) {
+                this.setshopcart()
+
                 this.$store.commit('subfood', {
                     id,
                     shopid
                 })
+
             },
 
 
+            // 检查购物车 检查本地缓存中是否有对应商家ID的购物车信息
             setshopcart() {
-                this.shopcart.push(this.foodobject);
-                console.log(JSON.stringify(this.shopcart));
-                localStorage.setItem("foodcart", JSON.stringify(this.shopcart));
-                console.log(JSON.parse(localStorage.getItem("foodcart")));
+                // this.shopcart.push(this.foodobject);
+                // console.log(JSON.stringify(this.shopcart));
+                // localStorage.setItem("foodcart", JSON.stringify(this.shopcart));
+                let cartList = JSON.parse(localStorage.getItem("foodcart"));
+                // console.log(JSON.parse(localStorage.getItem("foodcart")));
+                cartList.forEach((value, index) => {
+                    if (value.shopId == this.$route.query.shopid) {
+                        this.flag = true;
+                    } else {
+                        this.flag = false;
+                    }
+                })
             },
 
             showcartclick() {
-                this.showcart = !this.showcart
+                if (this.flag) {
+                    this.showcart = !this.showcart
+
+                }
             },
 
 
@@ -314,6 +363,8 @@
                 this.foodsScroll.scrollTo(0, -scrollY, 300);
             },
 
+
+            // 获取评论信息
             getcomments() {
                 this.axios.get(this.$Api.getcomments + this.$route.query.shopid).then(body => {
                     this.commentList = body.data;
@@ -321,12 +372,14 @@
 
             },
 
+            // 获取商家的详细信息
             getshoplist() {
                 this.axios.get(this.$Api.getshoplistbyid + this.$route.query.shopid).then(body => {
                     this.shopinfo = body.data
                 })
             },
 
+            // 获取商品列表
             getgoodlist() {
                 this.axios.get(this.$Api.goodlist).then(body => {
                     this.goodlist = body.data;
@@ -443,7 +496,8 @@
                 list-style: none;
 
                 .menu-item {
-                    padding: 15px 10px;
+                    font-size: 18px;
+                    padding: 15px 0;
                     // background-color: gray;
                     // border-bottom: 1px solid #dddddd;
                     border-left: 3px solid #3190e8;
@@ -477,7 +531,16 @@
                         display: flex;
                         margin-bottom: 10px;
 
+                        .icon {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            flex: 2;
+                            width: 100%;
+                        }
+
                         .info-content {
+                            flex: 8;
                             padding: 0 2px;
 
                             .food-name {
@@ -498,6 +561,8 @@
                             }
 
                             .price {
+                                z-index: 999;
+
                                 .food_price {
                                     vertical-align: middle;
                                     color: red;
@@ -506,11 +571,13 @@
 
                                 .plus {
                                     position: absolute;
+                                    // top: 20px;
                                     right: 20px;
-                                    display: inline-block;
-                                    vertical-align: middle;
+                                    color: white;
+                                    font-size: 20px;
                                     width: 20px;
                                     height: 20px;
+                                    line-height: 20px;
                                     background-color: #3190e8;
                                     border-radius: 50%;
                                     // overflow: hidden;
@@ -533,6 +600,9 @@
     }
 
     .mint-tab-container-item {
+
+        padding-bottom: 50px;
+
         .comment_info {
             padding: 10px 20px;
             width: 80%;
@@ -555,16 +625,33 @@
             }
 
             .score_info {
-                .van-tag--primary {
-                    // background-color: #1989fa;
-                    background-color: rgb(92, 176, 255);
+                // .van-tag--primary {
+                //     // background-color: #1989fa;
+                //     background-color: rgb(92, 176, 255);
+                // }
+
+                .primary {
+                    display: flex;
+                    list-style: none;
+                    // height: 40px;
+                    // justify-content: space-between;
+                    flex-wrap: wrap;
+                    width: 80%;
+
+                    li {
+                        box-sizing: border-box;
+                        border-radius: 5px;
+                        color: white;
+                        // width: 100px;
+                        // flex: 2;
+                        background-color: rgb(92, 176, 255);
+                        font-size: 12px;
+                        padding: 0 10px;
+                        margin: 5px 5px 5px 0;
+
+                    }
                 }
 
-                .van-tag {
-                    padding: 5px 5px;
-                    margin-right: 5px;
-                    margin-top: 8px;
-                }
             }
         }
 
@@ -574,6 +661,7 @@
             margin: auto;
             margin-top: 10px;
 
+            // display: flex;
             .user_score {
                 div {
                     // float: left;
@@ -584,6 +672,7 @@
                     img {
                         width: 40px;
                         height: 40px;
+
                     }
 
 
@@ -604,7 +693,6 @@
                     }
 
                     p {
-                        margin-bottom: 4px;
                         line-height: 18px;
                         vertical-align: middle;
                     }
@@ -635,9 +723,11 @@
         bottom: 0;
         left: 0;
         color: white;
-
+        width: 100%;
+        display: flex;
 
         .cart_icon_container {
+            flex: 2;
             width: 57px;
             height: 57px;
             background-color: #535356;
@@ -650,7 +740,6 @@
             .inline {
                 width: 50px;
                 height: 50px;
-                background-color: #3190e8;
                 border-radius: 50%;
                 position: absolute;
                 top: 50%;
@@ -658,11 +747,17 @@
                 transform: translate(-50%, -50%);
             }
 
+            .inline_color {
+                background-color: #3190e8;
+
+            }
+
             img {
                 position: absolute;
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%, -50%);
+                width: 80%;
             }
         }
 
@@ -671,9 +766,14 @@
         }
 
         .money {
+            // display: flex;
+            align-items: center;
+            // justify-content: center;
+            flex: 2;
             height: 100%;
             margin-left: 80px;
-            width: 165px;
+
+            // width: 165px;
             // margin-top: 5px;
             .sumprice {
                 font-size: 18px;
@@ -691,13 +791,18 @@
 
 
         .gotopay {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex: 2;
             background-color: #535356;
             position: relative;
-            width: 110px;
+            // width: 110px;
             height: 100%;
             line-height: 50px;
             padding: 0 10px;
-            top: -6px;
+            font-size: 20px;
+            // top: -6px;
             text-align: center;
         }
 
@@ -731,9 +836,11 @@
                 font-weight: normal;
                 line-height: 40px;
                 padding-left: 30px;
+                font-size: 18px;
             }
 
             span {
+                font-size: 18px;
                 position: absolute;
                 right: 30px;
             }

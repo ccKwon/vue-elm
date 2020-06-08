@@ -1,7 +1,8 @@
 <template>
     <div>
         <div class="address">
-            <span class="icon"><svg t="1576804418002" class="icon" viewBox="0 0 1024 1024" version="1.1"
+            <span class="icon">
+                <svg t="1576804418002" class="icon" viewBox="0 0 1024 1024" version="1.1"
                     xmlns="http://www.w3.org/2000/svg" p-id="6366" width="18" height="18">
                     <path
                         d="M648.256 850.272a32 32 0 1 1-40.704-49.386667C758.304 676.693333 832 566.037333 832 471.072 832 293.344 688.693333 149.333333 512 149.333333c-176.693333 0-320 144.010667-320 321.738667 0 115.232 108.416 253.045333 329.173333 409.493333a32 32 0 0 1-37.013333 52.213334C248.021333 765.429333 128 612.853333 128 471.072 128 258.069333 299.882667 85.333333 512 85.333333s384 172.736 384 385.738667c0 118.378667-83.701333 244.053333-247.744 379.2zM512 618.666667c-82.474667 0-149.333333-66.858667-149.333333-149.333334s66.858667-149.333333 149.333333-149.333333 149.333333 66.858667 149.333333 149.333333-66.858667 149.333333-149.333333 149.333334z m0-64a85.333333 85.333333 0 1 0 0-170.666667 85.333333 85.333333 0 0 0 0 170.666667z"
@@ -162,7 +163,12 @@
 
         .icon {
             vertical-align: middle;
-
+            // height: 18px;
+            // width: 18px;
+            svg {
+                height: 18px;
+                width: 18px;
+            }
             span {
                 margin-left: 5px;
             }
@@ -194,6 +200,7 @@
     }
 
     .pay_way {
+        font-size: 18px;
         height: 50px;
         margin-top: 15px;
         border-top: 1px solid rgb(223, 223, 223);
@@ -217,7 +224,9 @@
         }
     }
 
+
     .red {
+        font-size: 18px;
         height: 45px;
         line-height: 45px;
         color: #333333;
@@ -228,6 +237,7 @@
 
 
     .shoptitle {
+        font-size: 21px;
         margin-top: 10px;
         border-top: 1px solid #dfdfdf;
         border-bottom: 1px solid #dfdfdf;
@@ -246,6 +256,7 @@
     }
 
     .orderlist {
+        font-size: 18px;
         position: relative;
         margin-top: 10px;
         padding: 0 10px;
@@ -279,6 +290,7 @@
     }
 
     .canhe {
+        font-size: 14px;
         height: 40px;
         line-height: 40px;
         width: 100%;
@@ -287,6 +299,7 @@
     }
 
     .delivery {
+        font-size: 14px;
         height: 40px;
         line-height: 40px;
         width: 100%;
@@ -306,6 +319,7 @@
     }
 
     .total_price {
+        font-size: 20px;
         padding: 0 20px;
 
         .order_total {
@@ -326,6 +340,7 @@
     }
 
     .order_ps {
+        font-size: 16px;
         margin-top: 10px;
         display: flex;
         justify-content: space-between;
@@ -353,6 +368,7 @@
         }
 
         .confirm_order {
+            font-size: 20px;
             display: inline-block;
             width: 110px;
             text-align: center;
