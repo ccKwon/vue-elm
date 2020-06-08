@@ -1,4 +1,6 @@
-# font-vue
+# front-vue
+
+初学Vue时为了练习Vue全家桶并加深对Vue的认识而做的小项目
 
 # 功能
 - [x] 展示商家列表
@@ -15,24 +17,30 @@
 - [x] 帐户信息
 
 ## 截图 ##
-![avatar](/screenShot/index.png)
-<img src="https://github.com/ccKwon/vue-elm/tree/master/screenShot/index.png" width="365" height="619"/>
+### 主页
+<img src="https://raw.githubusercontent.com/ccKwon/vue-elm/master/screenShot/index.png" width="365" height="619"/>
 
 
-## Project setup
-```
-npm install
-```
+### 商铺列表页
+<img src="https://raw.githubusercontent.com/ccKwon/vue-elm/master/screenShot/shopList.png" width="365" height="619"/>
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+### 商铺详情页
+<img src="https://raw.githubusercontent.com/ccKwon/vue-elm/master/screenShot/shopInfo.png" width="365" height="619"/>
 
-### Compiles and minifies for production
-```
-npm run build
-```
+### 评论列表
+<img src="https://raw.githubusercontent.com/ccKwon/vue-elm/master/screenShot/comment.png" width="365" height="619"/>
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### 商铺购物车
+<img src="https://raw.githubusercontent.com/ccKwon/vue-elm/master/screenShot/shopInfo2.png" width="365" height="619"/>
+
+### 我的主页
+<img src="https://raw.githubusercontent.com/ccKwon/vue-elm/master/screenShot/my.png" width="365" height="619"/>
+<img src="https://raw.githubusercontent.com/ccKwon/vue-elm/master/screenShot/userInfo.png" width="365" height="619"/>
+
+### 修改密码
+<img src="https://raw.githubusercontent.com/ccKwon/vue-elm/master/screenShot/resetPassword.png" width="365" height="619"/>
+
+### 登录主页&注册页
+<img src="https://raw.githubusercontent.com/ccKwon/vue-elm/master/screenShot/login.png" width="365" height="619"/>
+
+# License
