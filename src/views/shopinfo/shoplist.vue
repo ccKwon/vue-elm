@@ -4,7 +4,7 @@
         <div class="shop_info">
             <ul>
                 <li v-for="item in shoplist" :key="item.id" @click="to_shop(item.shopid)">
-                    <span><img :src="item.img" alt=""></span>
+                    <span><img v-lazy="item.img" alt=""></span>
                     <span class="info_title">
                         <h4>{{ item.name }}</h4>
                         <p><span>

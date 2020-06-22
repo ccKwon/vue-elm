@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="img">
-            <img :src="foodinfo.img" alt="foodinfo.img">
+            <img v-lazy="foodinfo.img" alt="foodinfo.img">
         </div>
         <div class="food_warp">
             <h2 class="food_title">

@@ -1,7 +1,7 @@
 /<template>
     <div>
         <div class="shop_title">
-            <span class="shop_img"><img :src="shopinfo.img" alt=""></span>
+            <span class="shop_img"><img v-lazy="shopinfo.img" alt=""></span>
             <span class="shop_info">
                 <h2>{{ shopinfo.name }}</h2>
                 <p>商家配送 / 配送费 ￥{{ shopinfo.decost }}</p>
@@ -35,7 +35,7 @@
                                 <li @click="toFoodDeatil(foodList.fid)" v-for="foodList in item.foodLists"
                                     :key="foodList.fid" class="food-item">
                                     <div class="icon">
-                                        <img width="70px" height="70px" :src="foodList.img" alt="">
+                                        <img width="70px" height="70px" v-lazy="foodList.img" alt="">
                                     </div>
                                     <div class="info-content">
                                         <h2 class="food-name">{{ foodList.fname }}</h2>

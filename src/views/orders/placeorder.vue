@@ -34,7 +34,7 @@
 
         <div class="shoptitle">
             <span>
-                <img :src="shopinfo.img" alt="">
+                <img v-lazy="shopinfo.img" alt="">
             </span>
             <span>{{ shopinfo.name }}</span>
         </div>

@@ -5,7 +5,7 @@
         <div v-for="(item, index) in orders" :key="index" class="order_container">
             <div class="orders_info">
                 <div class="">
-                    <span> <img :src="shop_name[index].img" alt=""></span>
+                    <span> <img v-lazy="shop_name[index].img" alt=""></span>
                 </div>
                 <div class="title_time">
                     <span>
