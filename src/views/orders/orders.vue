@@ -5,11 +5,11 @@
         <div v-for="(item, index) in orders" :key="index" class="order_container">
             <div class="orders_info">
                 <div class="">
-                    <span> <img src="../../images/商圈.png" alt=""></span>
+                    <span> <img :src="shop_name[index].img" alt=""></span>
                 </div>
                 <div class="title_time">
                     <span>
-                        <section class="title"> {{ shop_name[index] }}
+                        <section class="title"> {{ shop_name[index].name }}
                             <van-icon color="grey" style="vertical-align: middle;" size="12px" name="arrow" />
                         </section>
                         <section class="time">2019-02-02</section>
@@ -37,7 +37,7 @@
         data() {
             return {
                 orders: '',
-                shop_name: []
+                shop_name: [],
             }
         },
 
@@ -53,6 +53,7 @@
                 console.log(localStorage.getItem("user"));
                 this.axios.get(this.$Api.queryorders + JSON.parse(localStorage.getItem("user"))).then(body => {
                     this.orders = body.data;
+                    console.log(this.orders);
                     // this.axios.get(this.$Api.getshoplistbyid + this.orders.)
                     this.orders.some(item => {
                         this.getshopname(item.shop_id);
@@ -63,7 +64,8 @@
 
             getshopname(id) {
                 this.axios.get(this.$Api.getshoplistbyid + id).then(body => {
-                    this.shop_name.push(body.data.name);
+                    this.shop_name.push(body.data)
+
                 })
             }
         },
@@ -121,8 +123,8 @@
                 vertical-align: middle;
 
                 img {
-                    width: 40px;
-                    height: 40px;
+                    width: 45px;
+                    height: 45px;
                 }
 
                 span {

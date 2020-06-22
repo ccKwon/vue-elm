@@ -1,7 +1,7 @@
 /<template>
     <div>
         <div class="shop_title">
-            <span class="shop_img"><img src="../../images/商圈.png" alt=""></span>
+            <span class="shop_img"><img :src="shopinfo.img" alt=""></span>
             <span class="shop_info">
                 <h2>{{ shopinfo.name }}</h2>
                 <p>商家配送 / 配送费 ￥{{ shopinfo.decost }}</p>
@@ -35,7 +35,7 @@
                                 <li @click="toFoodDeatil(foodList.fid)" v-for="foodList in item.foodLists"
                                     :key="foodList.fid" class="food-item">
                                     <div class="icon">
-                                        <img width="70px" height="70px" src="../../images/商圈.png" alt="">
+                                        <img width="70px" height="70px" :src="foodList.img" alt="">
                                     </div>
                                     <div class="info-content">
                                         <h2 class="food-name">{{ foodList.fname }}</h2>
@@ -376,6 +376,7 @@
             getshoplist() {
                 this.axios.get(this.$Api.getshoplistbyid + this.$route.query.shopid).then(body => {
                     this.shopinfo = body.data
+                    console.log(this.shopinfo);
                 })
             },
 
@@ -416,6 +417,8 @@
             img {
                 width: 68px;
                 height: 68px;
+                border-radius: 50%;
+                padding: 0 10px;
             }
         }
 
@@ -541,7 +544,7 @@
 
                         .info-content {
                             flex: 8;
-                            padding: 0 2px;
+                            padding: 0 8px;
 
                             .food-name {
                                 margin-bottom: 2px;
@@ -601,7 +604,10 @@
 
     .mint-tab-container-item {
 
+
         padding-bottom: 50px;
+
+
 
         .comment_info {
             padding: 10px 20px;

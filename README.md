@@ -30,6 +30,12 @@
 ### 评论列表
 <img src="https://raw.githubusercontent.com/ccKwon/vue-elm/master/screenShot/comment.png" width="365" height="619"/>
 
+### 订单列表
+<img src="https://raw.githubusercontent.com/ccKwon/vue-elm/master/screenShot/ordersList.png" width="365" height="619"/>
+
+### 下单页面
+<img src="https://raw.githubusercontent.com/ccKwon/vue-elm/master/screenShot/orderPay.png" width="365" height="619"/>
+
 ### 商铺购物车
 <img src="https://raw.githubusercontent.com/ccKwon/vue-elm/master/screenShot/shopInfo2.png" width="365" height="619"/>
 

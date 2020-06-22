@@ -4,7 +4,7 @@
         <div class="shop_info">
             <ul>
                 <li v-for="item in shoplist" :key="item.id" @click="to_shop(item.shopid)">
-                    <span><img src="../../images/商圈.png" alt=""></span>
+                    <span><img :src="item.img" alt=""></span>
                     <span class="info_title">
                         <h4>{{ item.name }}</h4>
                         <p><span>
@@ -51,6 +51,7 @@
             getshoplist() {
                 this.axios.get(this.$Api.getshoplist).then(body => {
                     this.shoplist = body.data;
+                    console.log(this.shoplist);
                 })
             }
         },

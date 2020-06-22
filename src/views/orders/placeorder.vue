@@ -34,7 +34,7 @@
 
         <div class="shoptitle">
             <span>
-                <img src="../../images/商圈 copy.png" alt="">
+                <img :src="shopinfo.img" alt="">
             </span>
             <span>{{ shopinfo.name }}</span>
         </div>
@@ -237,7 +237,7 @@
 
 
     .shoptitle {
-        font-size: 21px;
+        font-size: 18px;
         margin-top: 10px;
         border-top: 1px solid #dfdfdf;
         border-bottom: 1px solid #dfdfdf;
@@ -249,8 +249,9 @@
 
         span {
             img {
-                width: 28px;
-                height: 28px;
+                width: 35px;
+                height: 35px;
+                padding-right: 10px;
             }
         }
     }

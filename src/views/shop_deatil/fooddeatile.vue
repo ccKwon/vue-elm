@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="img">
-            <img src="./images/商圈.png" alt="">
+            <img :src="foodinfo.img" alt="foodinfo.img">
         </div>
         <div class="food_warp">
             <h2 class="food_title">
@@ -56,7 +56,7 @@
                     })
             },
 
-            
+
         },
 
 
@@ -66,9 +66,15 @@
 <style lang="scss" scoped>
     .container {
         .img {
+            width: 100vw;
+
             img {
-                width: 100%;
+                // width: 100%;
+                width: 95vw;
                 height: 300px;
+                padding: 5px 10px;
+                border-radius: 15px;
+
             }
         }
 
@@ -78,25 +84,29 @@
 
             // background-color: #F7F7F7;
             .food_title {
+                font-size: 24px;
                 padding: 5px 0;
             }
 
             .food_rate {
-                font-size: 12px;
+                font-size: 10px;
                 color: grey;
             }
 
             .food_price {
+                margin-top: 5px;
                 font-weight: 600;
                 color: red;
-                font-size: 24px;
+                font-size: 20px;
             }
         }
 
         .food_infowarp {
             padding: 10px;
 
-            .food_infotitle {}
+            .food_infotitle {
+                
+            }
 
             .food_info {}
         }
