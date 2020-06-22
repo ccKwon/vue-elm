@@ -104,11 +104,6 @@
         .food_infowarp {
             padding: 10px;
 
-            .food_infotitle {
-                
-            }
-
-            .food_info {}
         }
 
 

@@ -410,7 +410,7 @@
         color: white;
 
         .shop_img {
-            vertical-align: middle;
+            // vertical-align: middle;
             display: block;
             float: left;
 
@@ -867,7 +867,7 @@
                 padding: 10px 15px;
                 font-size: 16px;
 
-                .food_name {}
+                // .food_name {}
 
                 .food_price {
                     // margin-left: 150px;
