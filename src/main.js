@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import VueLazyload from 'vue-lazyload'
 // import './config/rem'
 import 'amfe-flexible'
 // import Mint from 'mint-ui'
@@ -26,6 +27,15 @@ Vue.use(Rate);
 Vue.use(Icon);
 Vue.use(Tab);
 Vue.use(Tabs);
+
+
+  // //解决移动端300ms延迟
+  // FastClick.attach(document.body)
+
+// 图片懒加载
+Vue.use(VueLazyload, {
+  loading: './assets/商圈.c54a18d9.png',
+})
 
 // import Vant from 'vant'
 // import 'vant/lib/index.css'
